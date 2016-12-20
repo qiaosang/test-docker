@@ -1,4 +1,4 @@
-FROM centos:6.8
+FROM centos
 
 MAINTAINER wenjianzhou nihao-wenjian@163.com
 
@@ -14,6 +14,8 @@ RUN set -x \
 RUN set -x \
  && yum -y install wget unzip supervisor \
  && yum clean all
+
+COPY files/supervisor/* ${USR_PATH}/
 
 # basic paths
 ENV TOP_PATH=/root
@@ -48,7 +50,7 @@ RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
     && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
     && rm -rf /tmp/*
 
-COPY files/filebeat/* ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
+COPY files/filebeat/* ${USR_PATH}/
 
 # glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
@@ -65,4 +67,4 @@ COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
 
 EXPOSE 4848 8080 8181
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c ${USR_PATH}/supervisord.conf"]
