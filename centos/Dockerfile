@@ -2,7 +2,7 @@ FROM centos:6.8
 
 MAINTAINER wenjianzhou nihao-wenjian@163.com
 
-# time zone and chpasswd
+# timezone and chpasswd
 ENV TZ=Asia/Shanghai \
     PW=root
 
@@ -42,9 +42,9 @@ RUN set -x \
  && yum clean all && rm -rf /tmp/*
 
 # logstash
-ENV LOGSTASH_DOWNLOAD_URL="wget https://artifacts.elastic.co/downloads/logstash/logstash-5.1.1.zip"
+ENV LOGSTASH_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/logstash/logstash-5.1.1.zip"
 
-RUN wget --no-check-certificate ${LOGSTASH_DOWNLOAD_URL} -O /tmp/logstash.zip \
+RUN wget ${LOGSTASH_DOWNLOAD_URL} -O /tmp/logstash.zip \
     && unzip -o /tmp/logstash.zip -d ${USR_PATH} \
     && rm -rf /tmp/*
 
@@ -55,7 +55,7 @@ ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/g
     PATH=${PATH}:${USR_PATH}/glassfish4/bin
 
 RUN set -x \
- && wget --no-check-certificate ${GLASSFISH_DOWNLOAD_URL} -O /tmp/glassfish.zip \
+ && wget ${GLASSFISH_DOWNLOAD_URL} -O /tmp/glassfish.zip \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
  && rm -rf /tmp/*
 
