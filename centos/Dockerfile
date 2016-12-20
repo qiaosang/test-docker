@@ -10,17 +10,17 @@ RUN set -x \
  && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
  && echo "root:${PW}" | chpasswd
 
+# basic tools
+RUN set -x \
+ && yum -y install wget unzip supervisor \
+ && yum clean all
+
 # basic paths
 ENV TOP_PATH=/root
 ENV USR_PATH=${TOP_PATH}/usr \
     APP_HOME=${TOP_PATH}/app
 
 RUN mkdir -p ${USR_PATH} ${APP_HOME}
-
-# basic tools
-RUN set -x \
- && yum -y install wget unzip supervisor \
- && yum clean all
 
 # ssh
 RUN set -x \
@@ -49,10 +49,6 @@ RUN wget ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
     && rm -rf /tmp/*
 
 COPY files/filebeat/* ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
-
-WORKDIR ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
-
-RUN ./filebeat -e -c filebeat.yml
 
 # glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
