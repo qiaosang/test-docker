@@ -2,7 +2,7 @@ FROM centos:6.8
 
 MAINTAINER wenjianzhou nihao-wenjian@163.com
 
-# basic setting
+# basic settings
 ENV TZ=Asia/Shanghai \
     PW=root
 
