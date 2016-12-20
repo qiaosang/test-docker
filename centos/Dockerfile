@@ -42,11 +42,24 @@ RUN set -x \
  && yum clean all && rm -rf /tmp/*
 
 # logstash
-ENV LOGSTASH_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/logstash/logstash-5.1.1.zip"
+#ENV LOGSTASH_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/logstash/logstash-5.1.1.zip"
+#
+#RUN wget ${LOGSTASH_DOWNLOAD_URL} -O /tmp/logstash.zip \
+#    && unzip -o /tmp/logstash.zip -d ${USR_PATH} \
+#    && rm -rf /tmp/*
 
-RUN wget ${LOGSTASH_DOWNLOAD_URL} -O /tmp/logstash.zip \
-    && unzip -o /tmp/logstash.zip -d ${USR_PATH} \
+# filebeat
+ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz"
+
+RUN wget ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
+    && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
     && rm -rf /tmp/*
+
+COPY files/filebeat/* ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
+
+WORKDIR ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
+
+RUN ./filebeat -e -c filebeat.yml
 
 # glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
