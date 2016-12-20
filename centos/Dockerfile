@@ -50,7 +50,7 @@ RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
     && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
     && rm -rf /tmp/*
 
-COPY files/filebeat/* ${USR_PATH}/
+COPY files/filebeat/* ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
 
 # glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
