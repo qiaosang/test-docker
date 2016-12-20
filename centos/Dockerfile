@@ -2,7 +2,7 @@ FROM centos:6.8
 
 MAINTAINER wenjianzhou nihao-wenjian@163.com
 
-# timezone and chpasswd
+# basic setting
 ENV TZ=Asia/Shanghai \
     PW=root
 
