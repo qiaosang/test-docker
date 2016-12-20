@@ -12,10 +12,8 @@ RUN set -x \
 
 # basic tools
 RUN set -x \
- && yum -y install wget unzip supervisor \
+ && yum -y install wget unzip \
  && yum clean all
-
-COPY files/supervisor/* /etc/
 
 # basic paths
 ENV TOP_PATH=/root
@@ -54,7 +52,6 @@ COPY files/filebeat/* ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
 
 # glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
-    GLASSFISH_HOME=${USR_PATH}/glassfish4 \
     GLASSFISH_DOMAIN=${USR_PATH}/glassfish4/glassfish/domains/domain1 \
     PATH=${PATH}:${USR_PATH}/glassfish4/bin
 
@@ -67,4 +64,4 @@ COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
 
 EXPOSE 4848 8080 8181
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/sbin/sshd", "-D"]
