@@ -15,7 +15,7 @@ RUN set -x \
  && yum -y install wget unzip supervisor \
  && yum clean all
 
-COPY files/supervisor/* ${USR_PATH}/
+COPY files/supervisor/* /etc/
 
 # basic paths
 ENV TOP_PATH=/root
@@ -67,4 +67,4 @@ COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
 
 EXPOSE 4848 8080 8181
 
-CMD ["/usr/bin/supervisord", "-c ${USR_PATH}/supervisord.conf"]
+CMD ["/usr/bin/supervisord"]
