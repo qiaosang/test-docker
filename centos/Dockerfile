@@ -19,7 +19,7 @@ RUN mkdir -p ${USR_PATH} ${APP_HOME}
 
 # basic tools
 RUN set -x \
- && yum -y install wget unzip \
+ && yum -y install wget unzip supervisor \
  && yum clean all
 
 # ssh
@@ -40,13 +40,6 @@ RUN set -x \
  && wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/jdk.rpm \
  && yum -y install /tmp/jdk.rpm \
  && yum clean all && rm -rf /tmp/*
-
-# logstash
-#ENV LOGSTASH_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/logstash/logstash-5.1.1.zip"
-#
-#RUN wget ${LOGSTASH_DOWNLOAD_URL} -O /tmp/logstash.zip \
-#    && unzip -o /tmp/logstash.zip -d ${USR_PATH} \
-#    && rm -rf /tmp/*
 
 # filebeat
 ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz"
@@ -76,4 +69,4 @@ COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
 
 EXPOSE 4848 8080 8181
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/usr/bin/supervisord"]
