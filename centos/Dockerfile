@@ -2,7 +2,7 @@ FROM centos:6.8
 
 MAINTAINER wenjianzhou nihao-wenjian@163.com
 
-# set time zone and chpasswd
+# time zone and chpasswd
 ENV TZ=Asia/Shanghai \
     PW=root
 
@@ -10,19 +10,19 @@ RUN set -x \
  && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
  && echo "root:${PW}" | chpasswd
 
-# custom paths
+# basic paths
 ENV TOP_PATH=/root
 ENV USR_PATH=${TOP_PATH}/usr \
     APP_HOME=${TOP_PATH}/app
 
 RUN mkdir -p ${USR_PATH} ${APP_HOME}
 
-# install basic tools
+# basic tools
 RUN set -x \
  && yum -y install wget unzip \
  && yum clean all
 
-# install ssh
+# ssh
 RUN set -x \
  && yum install -y openssh-server openssh-clients \
  && sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config \
@@ -32,7 +32,7 @@ RUN set -x \
 
 EXPOSE 22
 
-# install jdk
+# jdk
 ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
     JAVA_HOME=/usr/java/latest
 
@@ -41,7 +41,14 @@ RUN set -x \
  && yum -y install /tmp/jdk.rpm \
  && yum clean all && rm -rf /tmp/*
 
-# intsall glassfish
+# logstash
+ENV LOGSTASH_DOWNLOAD_URL="wget https://artifacts.elastic.co/downloads/logstash/logstash-5.1.1.zip"
+
+RUN wget --no-check-certificate ${LOGSTASH_DOWNLOAD_URL} -O /tmp/logstash.zip \
+    && unzip -o /tmp/logstash.zip -d ${USR_PATH} \
+    && rm -rf /tmp/*
+
+# glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
     GLASSFISH_HOME=${USR_PATH}/glassfish4 \
     GLASSFISH_DOMAIN=${USR_PATH}/glassfish4/glassfish/domains/domain1 \
@@ -50,7 +57,7 @@ ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/g
 RUN set -x \
  && wget --no-check-certificate ${GLASSFISH_DOWNLOAD_URL} -O /tmp/glassfish.zip \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
- && yum clean all && rm -rf /tmp/*
+ && rm -rf /tmp/*
 
 COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
 
