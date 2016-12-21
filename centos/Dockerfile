@@ -15,6 +15,7 @@ RUN set -x \
 # basic tools
 RUN set -x \
  && yum -y install wget unzip \
+ && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all
 
 # basic paths
