@@ -80,7 +80,7 @@ filebeat.prospectors:
 #-------------------------- Elasticsearch output ------------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["localhost:9200"]
+  hosts: ["elactic.zhangyu.tv:9200"]
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
