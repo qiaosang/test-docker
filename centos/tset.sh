@@ -1,8 +1,6 @@
 #!/bin/bash
 
-#set -x
-
-TEST_NAME=centos
+TEST_NAME=test
 
 docker stop ${TEST_NAME}
 

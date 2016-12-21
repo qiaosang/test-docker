@@ -1,4 +1,4 @@
-set TEST_NAME=centos
+set TEST_NAME=test
 
 docker stop %TEST_NAME%
 
