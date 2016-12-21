@@ -4,10 +4,12 @@ MAINTAINER wenjianzhou nihao-wenjian@163.com
 
 # basic settings
 ENV TZ=Asia/Shanghai \
+    LANG_=zh_CN.UTF-8 \
     PW=root
 
 RUN set -x \
  && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
+ && echo ${LANG_} > /etc/locale.conf \
  && echo "root:${PW}" | chpasswd
 
 # basic tools
@@ -25,9 +27,9 @@ RUN mkdir -p ${USR_PATH} ${APP_HOME}
 # ssh
 RUN set -x \
  && yum install -y openssh-server openssh-clients \
- && sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config \
- && ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key \
  && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
+ && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key \
+ && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key \
  && yum clean all
 
 EXPOSE 22
