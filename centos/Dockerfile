@@ -24,7 +24,7 @@ RUN mkdir -p ${USR_PATH} ${APP_HOME}
 
 # ssh
 RUN set -x \
- && yum install -y openssh-server openssh-clients python-setuptools\
+ && yum install -y openssh-server openssh-clients \
  && sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config \
  && ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key \
  && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
