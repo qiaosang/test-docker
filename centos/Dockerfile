@@ -73,8 +73,7 @@ EXPOSE 4848 8080 8181
 
 
 # commands for container
-ENV HOSTS_CUSTOMIZE="cat ${APP_HOME}/hosts >> /etc/hosts" \
-    LOG_COLLECT_START="${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml & sleep 3" \
+ENV LOG_COLLECT_START="${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml & sleep 3" \
     WEB_SERVER_START="asadmin start-domain && asadmin deploy ${APP_HOME}/${APP_NAME}" \
     WEB_SERVER_STOP="asadmin stop-domain"
 
