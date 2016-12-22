@@ -45,17 +45,18 @@ RUN set -x \
  && yum clean all && rm -rf /tmp/*
 
 # filebeat
-ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz"
+ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz" \
+    FILEBEAT_HOME=${USR_PATH}/filebeat-5.1.1-linux-x86_64
 
 RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
     && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
-    && mv ${USR_PATH}/filebeat-5.1.1-linux-x86_64 ${USR_PATH}/filebeat \
     && rm -rf /tmp/*
 
-COPY files/filebeat/* ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
+COPY files/filebeat/* ${FILEBEAT_HOME}/
 
 # glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
+    GLASSFISH_HOME=${USR_PATH}/glassfish4 \
     GLASSFISH_DOMAIN=${USR_PATH}/glassfish4/glassfish/domains/domain1 \
     PATH=${PATH}:${USR_PATH}/glassfish4/bin
 
