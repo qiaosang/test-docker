@@ -2,7 +2,7 @@ FROM wenjianzhou/centos
 
 MAINTAINER wenjianzhou
 
-RUN echo "root:zytv" | chpasswd
+RUN echo "root:root" | chpasswd
 
 ENV APP_NAME=*.war
 
