@@ -13,9 +13,9 @@ RUN set -x \
  && echo "root:${PW}" | chpasswd
 
 # basic paths
-ENV HOME=/root
-ENV USR_PATH=${HOME}/usr \
-    APP_HOME=${HOME}/app
+ENV TOP_HOME=/root
+ENV USR_PATH=${TOP_HOME}/usr \
+    APP_HOME=${TOP_HOME}/app
 
 RUN echo ${USR_PATH}
 
