@@ -14,12 +14,12 @@ RUN set -x \
 
 # basic paths
 ENV TOP_HOME=/root
-ENV USR_PATH=${TOP_HOME}/usr \
-    APP_HOME=${TOP_HOME}/app
+ENV APP_HOME=${TOP_HOME}/app \
+    BIN_PATH=${TOP_HOME}/bin PATH=${PATH}:${TOP_HOME}/bin \
+    USR_PATH=${TOP_HOME}/usr
 
-RUN echo ${USR_PATH}
-
-RUN mkdir -p ${USR_PATH} ${APP_HOME}
+RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH}
+COPY docker/bin/* ${BIN_PATH}/
 
 # basic tools
 RUN set -x \

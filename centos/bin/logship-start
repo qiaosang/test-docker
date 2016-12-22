@@ -1,0 +1,5 @@
+#!/bin/bash
+
+${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml &
+
+sleep 3
