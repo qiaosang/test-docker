@@ -46,7 +46,8 @@ RUN set -x \
 
 # filebeat
 ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz" \
-    FILEBEAT_HOME=${USR_PATH}/filebeat-5.1.1-linux-x86_64
+    FILEBEAT_HOME=${USR_PATH}/filebeat-5.1.1-linux-x86_64 \
+    FILEBEAT_START="cd ${FILEBEAT_HOME} && ./filebeat & sleep 3"
 
 RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
     && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
