@@ -46,8 +46,7 @@ RUN set -x \
 
 # filebeat
 ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz" \
-    FILEBEAT_HOME=${USR_PATH}/filebeat-5.1.1-linux-x86_64 \
-    FILEBEAT_START="cd ${FILEBEAT_HOME} && ./filebeat & sleep 3"
+    FILEBEAT_HOME=${USR_PATH}/filebeat-5.1.1-linux-x86_64
 
 RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
     && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
@@ -69,5 +68,10 @@ RUN set -x \
 COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
 
 EXPOSE 4848 8080 8181
+
+
+# COMMAND
+ENV LOG_COLLECT_START="${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml & sleep 3" \
+    WEB_SERVER_START="start-domain && deploy ${APP_HOME}/${APP_NAME}"
 
 CMD ["/usr/sbin/sshd", "-D"]
