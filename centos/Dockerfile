@@ -37,7 +37,7 @@ RUN set -x \
 
 EXPOSE 22
 
-COPY files/ssh/authorized_keys ~/.ssh/authorized_keys
+COPY files/ssh/authorized_keys /root/.ssh/
 #RUN chmod 600 ~/.ssh/authorized_keys
 
 # java
