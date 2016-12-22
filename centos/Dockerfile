@@ -49,6 +49,7 @@ ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat
 
 RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
     && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
+    && mv ${USR_PATH}/filebeat-5.1.1-linux-x86_64 ${USR_PATH}/filebeat \
     && rm -rf /tmp/*
 
 COPY files/filebeat/* ${USR_PATH}/filebeat-5.1.1-linux-x86_64/
