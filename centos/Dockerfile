@@ -23,7 +23,7 @@ RUN mkdir -p ${USR_PATH} ${APP_HOME}
 
 # basic tools
 RUN set -x \
- && yum -y install wget unzip \
+ && yum -y install wget unzip net-tools \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all
 
