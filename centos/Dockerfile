@@ -37,8 +37,13 @@ RUN set -x \
 
 EXPOSE 22
 
+RUN mkdir ~/.ssh/ && touch ~/.ssh/authorized_keys \
+ && cat ${APP_HOME}/authorized_keys >> ~/.ssh/authorized_keys \
+ && chmod 600 ~/.ssh/authorized_keys
+
 # java
-ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jre/8u111-b14/jre-8u111-linux-x64.rpm" \
+#ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
+ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
     JAVA_HOME=/usr/java/latest
 
 RUN set -x \
