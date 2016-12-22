@@ -12,18 +12,20 @@ RUN set -x \
  && echo ${LANG_} > /etc/locale.conf \
  && echo "root:${PW}" | chpasswd
 
+# basic paths
+ENV HOME=/root
+ENV USR_PATH=${HOME}/usr \
+    APP_HOME=${HOME}/app
+
+RUN echo ${USR_PATH}
+
+RUN mkdir -p ${USR_PATH} ${APP_HOME}
+
 # basic tools
 RUN set -x \
  && yum -y install wget unzip \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all
-
-# basic paths
-ENV TOP_PATH=/root
-ENV USR_PATH=${TOP_PATH}/usr \
-    APP_HOME=${TOP_PATH}/app
-
-RUN mkdir -p ${USR_PATH} ${APP_HOME}
 
 # ssh
 RUN set -x \
@@ -71,7 +73,8 @@ EXPOSE 4848 8080 8181
 
 
 # commands for container
-ENV LOG_COLLECT_START="${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml & sleep 3" \
+ENV CUSTOM_HOSTS="cat ${APP_HOME}/hosts >> /etc/hosts" \
+    LOG_COLLECT_START="${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml & sleep 3" \
     WEB_SERVER_START="start-domain && deploy ${APP_HOME}/${APP_NAME}"
 
 CMD ["/usr/sbin/sshd", "-D"]

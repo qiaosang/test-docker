@@ -2,7 +2,7 @@
 
 TEST_NAME=test
 
-docker build -t ${TEST_NAME} .
+docker build --no-cache -t ${TEST_NAME} .
 
 docker run -d --name ${TEST_NAME} ${TEST_NAME}
 
