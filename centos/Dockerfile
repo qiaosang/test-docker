@@ -19,7 +19,7 @@ ENV APP_HOME=${TOP_HOME}/app \
     USR_PATH=${TOP_HOME}/usr
 
 RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH}
-COPY docker/bin/* ${BIN_PATH}/
+COPY bin/* ${BIN_PATH}/
 
 # basic tools
 RUN set -x \
