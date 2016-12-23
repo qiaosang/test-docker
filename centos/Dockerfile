@@ -27,9 +27,8 @@ RUN set -x \
  && yum clean all
 
 # java
-ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn/java/jdk/7u80-b15/jre-7u80-linux-x64.rpm" \
 #ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
-#ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
+ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
     JAVA_HOME=/usr/java/latest
 
 RUN set -x \
