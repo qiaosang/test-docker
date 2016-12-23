@@ -26,19 +26,9 @@ RUN set -x \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all
 
-# ssh
-RUN set -x \
- && yum install -y openssh-server openssh-clients \
- && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
- && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key \
- && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key \
- && yum clean all
-
-EXPOSE 22
-
 # java
-ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
-#ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
+#ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
+ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
     JAVA_HOME=/usr/java/latest
 
 RUN set -x \
@@ -65,6 +55,16 @@ RUN set -x \
  && wget -q ${GLASSFISH_DOWNLOAD_URL} -O /tmp/glassfish.zip \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
  && rm -rf /tmp/*
+
+# ssh
+RUN set -x \
+ && yum install -y openssh-server openssh-clients \
+ && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
+ && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key \
+ && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key \
+ && yum clean all
+
+EXPOSE 22
 
 # add files
 COPY files/bin/* ${BIN_PATH}/
