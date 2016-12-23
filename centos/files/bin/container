@@ -18,4 +18,7 @@ elif [ $1 == "webserver-stop" ]
 elif [ $1 == "sshd" ]
   then
     /usr/sbin/sshd
+
+  else
+    echo "undefined command"
 fi
