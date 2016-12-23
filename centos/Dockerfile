@@ -18,7 +18,7 @@ ENV APP_HOME=${TOP_HOME}/app \
     BIN_PATH=${TOP_HOME}/bin PATH=${PATH}:${TOP_HOME}/bin \
     USR_PATH=${TOP_HOME}/usr
 
-RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH}
+RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
 COPY bin/* ${BIN_PATH}/
 
 # basic tools
