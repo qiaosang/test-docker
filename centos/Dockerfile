@@ -66,6 +66,7 @@ RUN set -x \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
  && rm -rf /tmp/*
 
+# ADD files
 COPY files/bin/* ${BIN_PATH}/
 COPY files/ssh/authorized_keys /root/.ssh/
 COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
