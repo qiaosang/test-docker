@@ -19,7 +19,6 @@ ENV APP_HOME=${TOP_HOME}/app \
     USR_PATH=${TOP_HOME}/usr
 
 RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
-COPY bin/* ${BIN_PATH}/
 
 # basic tools
 RUN set -x \
@@ -36,9 +35,6 @@ RUN set -x \
  && yum clean all
 
 EXPOSE 22
-
-COPY files/ssh/authorized_keys /root/.ssh/
-#RUN chmod 600 ~/.ssh/authorized_keys
 
 # java
 #ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
@@ -58,8 +54,6 @@ RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
  && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
  && rm -rf /tmp/*
 
-COPY files/filebeat/* ${FILEBEAT_HOME}/
-
 # glassfish
 #ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
 ENV GLASSFISH_DOWNLOAD_URL="http://download.java.net/glassfish/4.1.1/release/glassfish-4.1.1-web.zip" \
@@ -72,7 +66,10 @@ RUN set -x \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
  && rm -rf /tmp/*
 
+COPY files/bin/* ${BIN_PATH}/
+COPY files/ssh/authorized_keys /root/.ssh/
 COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
+COPY files/filebeat/* ${FILEBEAT_HOME}/
 
 EXPOSE 4848 8080 8181
 
