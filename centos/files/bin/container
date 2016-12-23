@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#!/bin/bash
+if [ $1 == "log-ship" ]
+  then
+    ${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml &
+    sleep 3
+
+elif [ $1 == "webserver-start" ]
+  then
+    asadmin start-domain
+    asadmin deploy ${APP_HOME}/${APP_NAME}
+
+elif [ $1 == "webserver-stop" ]
+  then
+    asadmin stop-domain
+
+elif [ $1 == "sshd" ]
+  then
+    /usr/sbin/sshd
+fi

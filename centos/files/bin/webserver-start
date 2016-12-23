@@ -1,5 +1,0 @@
-#!/bin/bash
-
-asadmin start-domain
-
-asadmin deploy ${APP_HOME}/${APP_NAME}
