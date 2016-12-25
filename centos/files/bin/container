@@ -19,6 +19,6 @@ elif [ $1 == "sshd" ]
   then
     /usr/sbin/sshd
 
-  else
-    echo "undefined command"
+else
+  echo "undefined command"
 fi
