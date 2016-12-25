@@ -24,7 +24,7 @@ RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
 RUN set -x \
  && yum -y install wget unzip net-tools \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
- && yum clean all
+ && yum clean all && rm -rf /var/log/*
 
 # java
 #ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
@@ -34,7 +34,7 @@ ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre
 RUN set -x \
  && wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/jre.rpm \
  && yum -y install /tmp/jre.rpm \
- && yum clean all && rm -rf /tmp/*
+ && yum clean all && rm -rf /tmp/* && rm -rf /var/log/*
 
 # filebeat
 ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz" \
