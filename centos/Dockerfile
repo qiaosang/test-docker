@@ -45,8 +45,8 @@ RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
  && rm -rf /tmp/*
 
 # glassfish
-#ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
-ENV GLASSFISH_DOWNLOAD_URL="http://download.java.net/glassfish/4.1.1/release/glassfish-4.1.1-web.zip" \
+ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
+#ENV GLASSFISH_DOWNLOAD_URL="http://download.java.net/glassfish/4.1.1/release/glassfish-4.1.1-web.zip" \
     GLASSFISH_HOME=${USR_PATH}/glassfish4 \
     GLASSFISH_DOMAIN=${USR_PATH}/glassfish4/glassfish/domains/domain1 \
     PATH=${PATH}:${USR_PATH}/glassfish4/bin
