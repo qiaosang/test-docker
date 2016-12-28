@@ -69,6 +69,7 @@ tags: ["aaa", "bbb", "ccc"]
 
 # Optional fields that you can specify to add additional information to the
 # output.
+fields_under_root: true
 fields:
 #  env: staging
    app: app
