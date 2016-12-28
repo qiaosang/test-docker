@@ -103,7 +103,7 @@ filebeat.prospectors:
   #ssl.key: "/etc/pki/client/cert.key"
 
 #----------------------------- Kafka ------------------------------------------
-#output.kafka:
+output.kafka:
     # initial brokers for reading cluster metadata
     hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
 
