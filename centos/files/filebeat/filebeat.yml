@@ -22,6 +22,8 @@ filebeat.prospectors:
     - /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
 
+  #document_type: apache
+
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.
   #exclude_lines: ["^DBG"]
@@ -110,6 +112,8 @@ output.kafka:
     hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
 
     # message topic selection + partitioning
+    # %{[type]}=document_type
+    #topic: '%{[type]}'
     topic: zy-log-input
     #partition.round_robin:
       #reachable_only: false
