@@ -4,7 +4,7 @@
 if [ $1 == "log-ship" ]; then
 
     if [ $2 ]; then
-        sed -i 's/topic: topic/topic: $2/g' ${FILEBEAT_HOME}/filebeat.yml
+        sed -i 's/topic: topic/topic: '$2'/g' ${FILEBEAT_HOME}/filebeat.yml
     fi
     ${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml &
     sleep 3
