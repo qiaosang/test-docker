@@ -110,7 +110,7 @@ output.kafka:
     hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
 
     # message topic selection + partitioning
-    topic: zy-test-log-input
+    topic: zy-log-input
     #partition.round_robin:
       #reachable_only: false
 
