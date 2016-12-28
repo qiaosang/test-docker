@@ -69,8 +69,9 @@ filebeat.prospectors:
 
 # Optional fields that you can specify to add additional information to the
 # output.
-#fields:
+fields:
 #  env: staging
+   app: app
 
 #================================ Outputs =====================================
 
@@ -108,7 +109,7 @@ output.kafka:
     hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
 
     # message topic selection + partitioning
-    topic: topic
+    topic: zy-test-log
     #partition.round_robin:
       #reachable_only: false
 
