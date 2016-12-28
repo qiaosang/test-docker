@@ -78,9 +78,9 @@ filebeat.prospectors:
 # Multiple outputs may be used.
 
 #-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
+#output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["elactic.zhangyu.tv:9200"]
+  #hosts: ["elactic.zhangyu.tv:9200"]
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
@@ -105,10 +105,10 @@ output.elasticsearch:
 #----------------------------- Kafka ------------------------------------------
 #output.kafka:
     # initial brokers for reading cluster metadata
-    #hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
+    hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
 
     # message topic selection + partitioning
-    #topic: '%{[type]}'
+    topic: topic
     #partition.round_robin:
       #reachable_only: false
 
