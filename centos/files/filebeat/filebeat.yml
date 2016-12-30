@@ -76,6 +76,23 @@ fields:
 #  env: staging
    app: app
 
+#================================ Processors ==================================
+# You can define processors in your configuration to process events before they are sent to the configured output.
+# Each processor receives an event, applies a defined action to the event, and returns the event.
+# The supported processors are: decode_json_fields/drop_event/drop_fields/include_fields
+# The supported conditions are: equals/contains/regexp/range/or/and/not
+# The parameters is the list of parameters to pass to the processor.
+
+#processors:
+ #- <processor_name>:
+     #when:
+        #<condition>
+     #<parameters>
+ #- <processor_name>:
+     #when:
+        #<condition>
+     #<parameters>
+
 #================================ Outputs =====================================
 
 # Configure what outputs to use when sending the data collected by the beat.
