@@ -63,7 +63,7 @@ filebeat.prospectors:
 
 # The name of the shipper that publishes the network data. It can be used to group
 # all the transactions sent by a single shipper in the web interface.
-#name:
+#name: xxx
 
 # The tags of the shipper are included in their own field with each
 # transaction published.
@@ -78,7 +78,6 @@ fields:
 
 #================================ Processors ==================================
 # You can define processors in your configuration to process events before they are sent to the configured output.
-# Each processor receives an event, applies a defined action to the event, and returns the event.
 # The supported processors are: decode_json_fields/drop_event/drop_fields/include_fields
 # The supported conditions are: equals/contains/regexp/range/or/and/not
 # The parameters is the list of parameters to pass to the processor.
