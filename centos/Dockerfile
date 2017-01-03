@@ -23,6 +23,7 @@ RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
 # basic tools
 RUN set -x \
  && yum -y install wget unzip net-tools \
+# && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all && rm -rf /var/log/*
 
 # java
