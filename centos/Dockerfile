@@ -22,39 +22,39 @@ RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
 
 # basic tools
 RUN set -x \
- && yum -y install wget unzip net-tools kde-l10n-Chinese.noarch \
+ && yum -y install wget unzip net-tools kde-l10n-Chinese \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all && rm -rf /var/log/*
 
-# java
-ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
-#ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
-    JAVA_HOME=/usr/java/latest
-
-RUN set -x \
- && wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
- && yum -y install /tmp/java.rpm \
- && yum clean all && rm -rf /tmp/* && rm -rf /var/log/*
-
-# filebeat
-ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz" \
-    FILEBEAT_HOME=${USR_PATH}/filebeat-5.1.1-linux-x86_64
-
-RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
- && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
- && rm -rf /tmp/*
-
-# glassfish
-ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
-#ENV GLASSFISH_DOWNLOAD_URL="http://download.java.net/glassfish/4.1.1/release/glassfish-4.1.1-web.zip" \
-    GLASSFISH_HOME=${USR_PATH}/glassfish4 \
-    GLASSFISH_DOMAIN=${USR_PATH}/glassfish4/glassfish/domains/domain1 \
-    PATH=${PATH}:${USR_PATH}/glassfish4/bin
-
-RUN set -x \
- && wget -q ${GLASSFISH_DOWNLOAD_URL} -O /tmp/glassfish.zip \
- && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
- && rm -rf /tmp/*
+## java
+#ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
+##ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
+#    JAVA_HOME=/usr/java/latest
+#
+#RUN set -x \
+# && wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
+# && yum -y install /tmp/java.rpm \
+# && yum clean all && rm -rf /tmp/* && rm -rf /var/log/*
+#
+## filebeat
+#ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz" \
+#    FILEBEAT_HOME=${USR_PATH}/filebeat-5.1.1-linux-x86_64
+#
+#RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
+# && tar -xzf /tmp/filebeat.tar.gz -C ${USR_PATH} \
+# && rm -rf /tmp/*
+#
+## glassfish
+#ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
+##ENV GLASSFISH_DOWNLOAD_URL="http://download.java.net/glassfish/4.1.1/release/glassfish-4.1.1-web.zip" \
+#    GLASSFISH_HOME=${USR_PATH}/glassfish4 \
+#    GLASSFISH_DOMAIN=${USR_PATH}/glassfish4/glassfish/domains/domain1 \
+#    PATH=${PATH}:${USR_PATH}/glassfish4/bin
+#
+#RUN set -x \
+# && wget -q ${GLASSFISH_DOWNLOAD_URL} -O /tmp/glassfish.zip \
+# && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
+# && rm -rf /tmp/*
 
 # ssh
 RUN set -x \
