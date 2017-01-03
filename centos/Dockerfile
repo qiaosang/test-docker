@@ -4,12 +4,13 @@ MAINTAINER wenjianzhou nihao-wenjian@163.com
 
 # basic settings
 ENV TZ=Asia/Shanghai \
-#    LANG_=zh_CN.UTF-8 \
+    LANG_=zh_CN.UTF-8 \
     PW=root
 
 RUN set -x \
  && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
-# && echo LANG=\"${LANG_}\" > /etc/locale.conf \
+ && echo LANG=\"${LANG_}\" > /etc/locale.conf \
+ && localedef -i zh_CN -f UTF-8 zh_CN.UTF-8 \
  && echo "root:${PW}" | chpasswd
 
 # basic paths
