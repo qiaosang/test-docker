@@ -4,12 +4,12 @@ MAINTAINER wenjianzhou nihao-wenjian@163.com
 
 # basic settings
 ENV TZ=Asia/Shanghai \
-    LANG_="zh_CN.UTF-8" \
+    LANG=zh_CN.UTF-8 \
     PW=root
 
 RUN set -x \
  && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
- && echo LANG=${LANG_} > /etc/locale.conf \
+ && echo LANG=\"${LANG}\" > /etc/locale.conf \
  && echo "root:${PW}" | chpasswd
 
 # basic paths
@@ -22,7 +22,7 @@ RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
 
 # basic tools
 RUN set -x \
- && yum -y install wget unzip net-tools \
+ && yum -y install wget unzip net-tools kde-l10n-Chinese \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all && rm -rf /var/log/*
 
