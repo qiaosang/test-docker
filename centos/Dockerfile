@@ -4,7 +4,7 @@ MAINTAINER wenjianzhou nihao-wenjian@163.com
 
 # basic settings
 ENV TZ=Asia/Shanghai \
-#    LANG=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
     PW=root
 
 RUN set -x \
