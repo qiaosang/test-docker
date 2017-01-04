@@ -1,6 +1,6 @@
 FROM centos
 
-MAINTAINER wenjianzhou nihao-wenjian@163.com
+MAINTAINER wenjianzhou <nihao-wenjian@163.com>
 
 # basic settings
 ENV TZ=Asia/Shanghai \
@@ -8,9 +8,7 @@ ENV TZ=Asia/Shanghai \
     PW=root
 
 RUN set -x \
- && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
-# && echo LANG=\"${LANG_}\" > /etc/locale.conf \
-# && localedef -i zh_CN -f UTF-8 zh_CN.UTF-8 \
+ && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
  && echo "root:${PW}" | chpasswd
 
 # basic paths
