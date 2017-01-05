@@ -60,7 +60,7 @@ filebeat.prospectors:
 
 #================================ Global ======================================
 
-filebeat.spool_size: 1000
+filebeat.spool_size: 100
 filebeat.idle_timeout: 5s
 filebeat.shutdown_timeout: 5s
 
