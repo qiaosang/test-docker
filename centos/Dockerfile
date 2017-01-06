@@ -18,7 +18,7 @@ ENV APP_HOME=${TOP_HOME}/app \
     USR_PATH=${TOP_HOME}/usr \
     WWW_ROOT=${TOP_HOME}/www
 
-RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} ${WWW_ROOT} && rm -f /root/anaconda-ks.cfg
+RUN chmod a+x root && mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} ${WWW_ROOT} && rm -f /root/anaconda-ks.cfg
 
 # basic tools
 RUN set -x \
