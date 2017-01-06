@@ -15,7 +15,8 @@ RUN set -x \
 ENV TOP_HOME=/root
 ENV APP_HOME=${TOP_HOME}/app \
     BIN_PATH=${TOP_HOME}/bin PATH=${PATH}:${TOP_HOME}/bin \
-    USR_PATH=${TOP_HOME}/usr
+    USR_PATH=${TOP_HOME}/usr \
+    WWW_ROOT=${TOP_HOME}/www
 
 RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
 
@@ -23,7 +24,7 @@ RUN mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} && rm -f /root/anaconda-ks.cfg
 RUN set -x \
  && yum -y install wget unzip net-tools \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
- && yum clean all && rm -rf /var/log/*
+ && yum clean all
 
 # java
 ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
@@ -33,7 +34,7 @@ ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk
 RUN set -x \
  && wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
  && yum -y install /tmp/java.rpm \
- && yum clean all && rm -rf /tmp/* && rm -rf /var/log/*
+ && yum clean all && rm -rf /tmp/*
 
 # filebeat
 ENV FILEBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-linux-x86_64.tar.gz" \
@@ -55,21 +56,34 @@ RUN set -x \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
  && rm -rf /tmp/*
 
+
+# nginx
+ENV NGINX_DOWNLOAD_URL="http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm" \
+    NGINX_CONF_PATH=/etc/nginx/conf.d
+
+RUN set -x \
+ && wget -q ${NGINX_DOWNLOAD_URL} -O /tmp/nginx.rpm \
+ && yum -y install /tmp/nginx.rpm \
+ && yum -y install nginx \
+ && rm -rf /tmp/*
+
 # ssh
 RUN set -x \
  && yum install -y openssh-server openssh-clients \
  && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
  && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key \
  && ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key \
- && yum clean all && rm -rf /var/log/*
+ && yum clean all
 
 EXPOSE 22
 
 # add files
 COPY files/bin/* ${BIN_PATH}/
-COPY files/ssh/authorized_keys /root/.ssh/
-COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
 COPY files/filebeat/* ${FILEBEAT_HOME}/
+COPY files/glassfish/* ${GLASSFISH_DOMAIN}/config/
+COPY files/nginx/* ${NGINX_CONF_PATH}/
+COPY files/ssh/authorized_keys /root/.ssh/
+
 
 EXPOSE 4848 8080 8181
 
