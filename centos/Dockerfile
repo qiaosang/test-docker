@@ -54,6 +54,7 @@ ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/g
 RUN set -x \
  && wget -q ${GLASSFISH_DOWNLOAD_URL} -O /tmp/glassfish.zip \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
+ && rm -rf ${GLASSFISH_DOMAIN}/logs && ln -sf /var/log ${GLASSFISH_DOMAIN}/logs \
  && rm -rf /tmp/*
 
 
