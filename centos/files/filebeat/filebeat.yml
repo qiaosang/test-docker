@@ -20,6 +20,7 @@ filebeat.prospectors:
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
     - /var/log/*.log
+    - /root/usr/glassfish4/glassfish/domains/domain1/logs/*.log
     #- c:\programdata\elasticsearch\logs\*
 
   #document_type: apache
