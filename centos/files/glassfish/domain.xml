@@ -406,6 +406,9 @@
                 -->
                 <jvm-options>-Dfelix.fileinstall.disableConfigSave=false</jvm-options>
                 <!-- End of OSGi bundle configurations -->
+
+                <jvm-options>-Dfile.encoding=UTF-8</jvm-options>
+
             </java-config>
             <availability-service>
                 <web-container-availability/>
