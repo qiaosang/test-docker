@@ -22,7 +22,7 @@ RUN chmod a+x root && mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} ${WWW_ROOT} &
 
 # basic tools
 RUN set -x \
- && yum -y install wget unzip net-tools \
+ && yum -y install wget unzip net-tools sysstat \
 # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all
 
