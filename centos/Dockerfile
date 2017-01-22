@@ -23,12 +23,10 @@ RUN chmod a+x root && mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} ${WWW_ROOT} &
 # basic tools
 RUN set -x \
  && yum -y install wget unzip net-tools sysstat \
-# && wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
  && yum clean all
 
-# java
+# jdk
 ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm" \
-#ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-linux-x64.rpm" \
     JAVA_HOME=/usr/java/latest
 
 RUN set -x \
@@ -46,7 +44,6 @@ RUN wget -q ${FILEBEAT_DOWNLOAD_URL} -O /tmp/filebeat.tar.gz \
 
 # glassfish
 ENV GLASSFISH_DOWNLOAD_URL="http://download.oracle.com/glassfish/4.1.1/release/glassfish-4.1.1.zip" \
-#ENV GLASSFISH_DOWNLOAD_URL="http://download.java.net/glassfish/4.1.1/release/glassfish-4.1.1-web.zip" \
     GLASSFISH_HOME=${USR_PATH}/glassfish4 \
     GLASSFISH_DOMAIN=${USR_PATH}/glassfish4/glassfish/domains/domain1 \
     PATH=${PATH}:${USR_PATH}/glassfish4/bin
@@ -56,7 +53,6 @@ RUN set -x \
  && unzip -o /tmp/glassfish.zip -d ${USR_PATH} \
  && rm -rf ${GLASSFISH_DOMAIN}/logs && ln -sf /var/log ${GLASSFISH_DOMAIN}/logs \
  && rm -rf /tmp/*
-
 
 # nginx
 ENV NGINX_DOWNLOAD_URL="http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm" \
@@ -68,7 +64,7 @@ RUN set -x \
  && yum -y install nginx \
  && rm -rf /tmp/*
 
-# ssh
+# sshd
 RUN set -x \
  && yum install -y openssh-server openssh-clients \
  && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
