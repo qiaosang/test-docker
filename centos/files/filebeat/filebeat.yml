@@ -79,7 +79,8 @@ filebeat.shutdown_timeout: 5s
 fields_under_root: true
 fields:
 #  env: staging
-   app: app
+   app: xxx
+   ip: xxx
 
 #================================ Processors ==================================
 # You can define processors in your configuration to process events before they are sent to the configured output.
