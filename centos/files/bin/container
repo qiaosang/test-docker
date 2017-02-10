@@ -5,7 +5,7 @@ if [ $1 == "log-ship" ]; then
 
     if [ $2 ]; then
         sed -i 's/app: xxx/app: '$2'/g' ${FILEBEAT_HOME}/filebeat.yml
-        ip=$(/sbin/ifconfig -a|egrep "inet .*([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)"|awk '{print $2}' \|sed 's/addr://g'|egrep -v "172.17|127.0.0.1"|head -n 1)
+        ip=$(/sbin/ifconfig -a|egrep "inet .*([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)"|awk '{print $2}'|sed 's/addr://g'|egrep -v "172.17|127.0.0.1"|head -n 1)
         sed -i 's/ip: xxx/ip: '${ip}'/g' ${FILEBEAT_HOME}/filebeat.yml
     fi
     ${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml &
