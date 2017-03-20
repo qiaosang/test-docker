@@ -62,6 +62,7 @@ RUN set -x \
  && wget -q ${NGINX_DOWNLOAD_URL} -O /tmp/nginx.rpm \
  && yum -y install /tmp/nginx.rpm \
  && yum -y install nginx \
+ && rm -rf NGINX_CONF_PATH/* \
  && rm -rf /tmp/*
 
 # sshd
