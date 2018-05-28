@@ -26,11 +26,11 @@ RUN set -x \
  && yum clean all
 
 # jdk
-ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm?AuthParam=1527480019_61ac3e83af336364dcf2449d53516531" \
+ENV JAVA_DOWNLOAD_URL="http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm" \
     JAVA_HOME=/usr/java/latest
 
 RUN set -x \
- && wget -q ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
+ && wget -q --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JAVA_DOWNLOAD_URL} -O /tmp/java.rpm \
  && yum -y install /tmp/java.rpm \
  && yum clean all && rm -rf /tmp/*
 
