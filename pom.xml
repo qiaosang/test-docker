@@ -9,7 +9,7 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>webapp-demo</module>
+        <module>test-webapp</module>
     </modules>
 
 </project>
