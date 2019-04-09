@@ -12,13 +12,13 @@ RUN set -x \
  && echo "root:${PW}" | chpasswd
 
 # basic paths
-ENV TOP_HOME=/root
-ENV APP_HOME=${TOP_HOME}/app \
-    BIN_PATH=${TOP_HOME}/bin PATH=${PATH}:${TOP_HOME}/bin \
-    USR_PATH=${TOP_HOME}/usr \
-    WWW_ROOT=${TOP_HOME}/www
+ENV ROOT=/root
+ENV APP_ROOT=${ROOT}/app \
+    BIN_PATH=${ROOT}/bin PATH=${PATH}:${ROOT}/bin \
+    USR_PATH=${ROOT}/usr \
+    WWW_ROOT=${ROOT}/www
 
-RUN chmod a+x root && mkdir -p ${APP_HOME} ${BIN_PATH} ${USR_PATH} ${WWW_ROOT} && rm -f /root/anaconda-ks.cfg
+RUN chmod a+x root && mkdir -p ${APP_ROOT} ${BIN_PATH} ${USR_PATH} ${WWW_ROOT} && rm -f /root/anaconda-ks.cfg
 
 # basic tools
 RUN set -x \
